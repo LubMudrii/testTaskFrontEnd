@@ -1,0 +1,47 @@
+<form [formGroup]="BookInfo" mat-dialog-content>
+  <mat-form-field>
+  <input matInput placeholder="ISBN" formControlName="ISBN">
+</mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Title" formControlName="Title">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text"  placeholder="Author" formControlName="Author">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text"  placeholder="Language" formControlName="Language">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" min="1" placeholder="CountOfPages" formControlName="CountOfPages">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="PublicationDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput (focus)="FilterTypes(BookTypeName.value)" (input)="FilterTypes(BookTypeName.value)"
+           #BookTypeName formControlName="BookTypeID" [matAutocomplete]="auto"
+           placeholder="Book Type">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of FilteredTypes" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<div *ngIf="Errors">
+  <mat-error *ngFor="let code of Errors.getCodes()">
+    {{code}} : {{Errors.get(code)}}
+  </mat-error>
+</div>
+<div mat-dialog-actions>
+  <button (click)="submit()" color="primary" mat-raised-button>
+    Submit
+  </button>
+  <button (click)="dialogRef.close(false)" color="warn" mat-raised-button>
+    Close
+  </button>
+</div>

@@ -1,0 +1,44 @@
+.container {
+  padding: 5vh 5vw;
+  background-color: white;
+  max-height: 90vh;
+}
+
+mat-list {
+  overflow: auto;
+  max-height: 85vh!important;
+  padding: 0!important;
+}
+
+.item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.spinner{
+  margin-top: calc((100vh - 64px) * 0.35);
+  margin-left: calc((100vw) * 0.45);
+}
+
+::ng-deep .header .mat-list-item-content {
+  padding: 0 5px 0 16px!important;
+}
+
+@media(max-width: 600px) {
+  .container {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 460px) {
+  mat-list-item {
+    font-size: 15px!important;
+  }
+}

@@ -9,4 +9,8 @@ export class ConfigService {
   getApiUrl() {
     return 'https://localhost:44302';
   }
+
+  getUpdateTime() {
+    return 5000;
+  }
 }

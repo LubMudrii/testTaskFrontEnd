@@ -1,0 +1,38 @@
+<div class="container" *ngIf="!ShowSpinner">
+
+  <mat-selection-list class="product-list" #books (selectionChange)="SelectedChanges(books.selectedOptions.selected)">
+    <mat-list-item class="header" style="background-color: gainsboro">
+      <div class="item">Books: </div>
+      <div class="action-buttons">
+        <button mat-icon-button color="primary" (click)="CreateNew()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="Delete()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button class="header-selectAll" *ngIf="books.selectedOptions.selected.length > 0" (click)="SelectDeselectAll(books)">
+          <mat-icon>crop_din</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+    <mat-list-option color="primary" *ngFor="let book of PageBooks" [value]="book">
+      {{book.title}}
+    </mat-list-option>
+    <mat-list-item *ngIf="Books.length < 1">No books yet</mat-list-item>
+  </mat-selection-list>
+
+
+  <mat-paginator [length]="Books.length"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[10, 25]"
+                 (page)="OnPageChange($event)">
+  </mat-paginator>
+
+  <div *ngIf="Errors">
+    <mat-error *ngFor="let code of Errors.getCodes()">
+      {{code}} : {{Errors.get(code)}}
+    </mat-error>
+  </div>
+</div>
+
+<mat-spinner class="spinner" *ngIf="ShowSpinner"></mat-spinner>
